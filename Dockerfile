@@ -8,13 +8,14 @@ RUN apt-get -qq update \
 # Download and install hugo
 ENV HUGO_VERSION 0.52
 
-ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
+ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 
 #ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} /tmp/hugo.deb
-RUN curl -sL -o /tmp/hugo.deb \
+RUN curl -sL -o /tmp/hugo.tar.gz \
     https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
-    dpkg -i /tmp/hugo.deb && \
-    rm /tmp/hugo.deb && \
+    tar -xvzf /tmp/hugo.tar.gz && \
+    # dpkg -i /tmp/hugo.tar.gz && \
+    rm /tmp/hugo.tar.gz && \
     mkdir /usr/share/blog
 
 WORKDIR /usr/share/blog
@@ -24,8 +25,8 @@ EXPOSE 1313
 
 # Automatically build site
 ONBUILD ADD site/ /usr/share/blog
-ONBUILD RUN hugo -d /usr/share/nginx/html/
+ONBUILD RUN /tmp/hugo -d /usr/share/nginx/html/
 
 # By default, serve site
 ENV HUGO_BASE_URL http://localhost:1313
-CMD hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
+CMD /tmp/hugo server -b ${HUGO_BASE_URL} --bind=0.0.0.0
