@@ -2,7 +2,7 @@ FROM debian:jessie
 
 # Install pygments (for syntax highlighting) 
 RUN apt-get -qq update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments git ca-certificates asciidoc libstdc++6 curl \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments git ca-certificates asciidoc libstdc++6 gcc-4.9 curl \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Download and install hugo
