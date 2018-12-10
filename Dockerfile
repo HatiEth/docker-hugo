@@ -29,7 +29,7 @@ RUN tar -xf /tmp/hugo.tar.gz -C /tmp \
 #     mkdir /usr/share/blog
 
 RUN apk add --update git asciidoctor libc6-compat libstdc++ \
-  && apk upgrade
+  && apk upgrade \
   && apk add --no-cache ca-certificates
 
 WORKDIR /usr/share/blog
