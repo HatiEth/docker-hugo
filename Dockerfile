@@ -2,20 +2,20 @@ FROM debian:jessie
 
 # Install pygments (for syntax highlighting) 
 RUN apt-get -qq update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments git ca-certificates asciidoc curl \
+	&& DEBIAN_FRONTEND=noninteractive apt-get -qq install -y --no-install-recommends python-pygments git ca-certificates asciidoc libstdc++6 curl \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Download and install hugo
 ENV HUGO_VERSION 0.52
 
-ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
+ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 
 #ADD https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} /tmp/hugo.deb
 RUN curl -sL -o /tmp/hugo.tar.gz \
     https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${HUGO_BINARY} && \
-    tar -xvzf /tmp/hugo.tar.gz -C /usr/local/bin && \
-    chmod +x /usr/local/bin/hugo && \
-    # dpkg -i /tmp/hugo.tar.gz && \
+    # tar -xvzf /tmp/hugo.tar.gz -C /usr/local/bin && \
+    # chmod +x /usr/local/bin/hugo && \
+    dpkg -i /tmp/hugo.tar.gz && \
     rm /tmp/hugo.tar.gz && \
     mkdir /usr/share/blog
 
