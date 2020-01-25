@@ -1,6 +1,6 @@
 # FROM debian:jessie
 # Use Alpine Linux as our base image so that we minimize the overall size our final container, and minimize the surface area of packages that could be out of date.
-FROM alpine:3.8@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184cadaf5528
+FROM alpine:latest
 
 # Install pygments (for syntax highlighting) 
 # RUN apt-get -qq update \
@@ -10,7 +10,7 @@ FROM alpine:3.8@sha256:621c2f39f8133acb8e64023a94dbdf0d5ca81896102b9e57c0dc184ca
 
 
 # Download and install hugo
-ENV HUGO_VERSION 0.56.3
+ENV HUGO_VERSION 0.63.1
 
 ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 
