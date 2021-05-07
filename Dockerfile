@@ -10,7 +10,7 @@ FROM alpine:latest
 
 
 # Download and install hugo
-ENV HUGO_VERSION 0.74.3
+ENV HUGO_VERSION 0.83.1
 
 ENV HUGO_BINARY hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz
 
